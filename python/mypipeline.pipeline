@@ -9,10 +9,11 @@
       "id": "primary",
       "nodes": [
         {
-          "id": "449a0ef3-2fcb-43ca-af65-5b8525fa310b",
+          "id": "5002ae5a-f3de-4808-897d-753d0b1e07f2",
           "type": "execution_node",
           "op": "execute-notebook-node",
           "app_data": {
+            "label": "",
             "component_parameters": {
               "dependencies": [],
               "include_subdirectories": false,
@@ -24,14 +25,13 @@
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "test1-Copy1.ipynb"
+              "filename": "test1.ipynb"
             },
-            "label": "",
             "ui_data": {
-              "label": "test1-Copy1.ipynb",
+              "label": "test1.ipynb",
               "image": "/notebook/project-1/workbench1/static/elyra/notebook.svg",
-              "x_pos": 776,
-              "y_pos": 404,
+              "x_pos": 572,
+              "y_pos": 297,
               "description": "Run notebook file"
             }
           },
