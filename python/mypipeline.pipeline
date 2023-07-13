@@ -9,11 +9,10 @@
       "id": "primary",
       "nodes": [
         {
-          "id": "5002ae5a-f3de-4808-897d-753d0b1e07f2",
+          "id": "9ce628cc-8fd3-496f-9b68-b92d7c6dd61d",
           "type": "execution_node",
-          "op": "execute-notebook-node",
+          "op": "execute-python-node",
           "app_data": {
-            "label": "",
             "component_parameters": {
               "dependencies": [],
               "include_subdirectories": false,
@@ -25,14 +24,15 @@
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "test1.ipynb"
+              "filename": "test1.py"
             },
+            "label": "",
             "ui_data": {
-              "label": "test1.ipynb",
-              "image": "/notebook/project-1/workbench1/static/elyra/notebook.svg",
-              "x_pos": 572,
-              "y_pos": 297,
-              "description": "Run notebook file"
+              "label": "test1.py",
+              "image": "/notebook/test-project1/workbench/static/elyra/python.svg",
+              "x_pos": 203,
+              "y_pos": 305,
+              "description": "Run Python script"
             }
           },
           "inputs": [
@@ -75,9 +75,9 @@
           "name": "mypipeline",
           "runtime": "Data Science Pipelines",
           "pipeline_defaults": {
+            "mounted_volumes": [],
             "kubernetes_tolerations": [],
             "kubernetes_pod_annotations": [],
-            "mounted_volumes": [],
             "kubernetes_pod_labels": [],
             "kubernetes_shared_mem_size": {},
             "env_vars": [],
