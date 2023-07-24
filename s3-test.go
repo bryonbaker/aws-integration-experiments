@@ -81,9 +81,9 @@ func main() {
 	}
 
 	bucketName := viper.GetString("bucketName")
+	fileName := viper.GetString("fileName")
 
 	// Read the file and extract the data
-	fileName := "addresses2.txt"
 	filePath := fileName
 	data, err := os.Open(filePath)
 
