@@ -2,9 +2,9 @@ import kfp.dsl as dsl
 import kfp.components as comp
 
 # Define container ops for module1, module2, and module3
-module1_op = comp.load_component_from_url('https://raw.githubusercontent.com/your-username/repo-name/master/module1.py')
-module2_op = comp.load_component_from_url('https://raw.githubusercontent.com/your-username/repo-name/master/module2.py')
-module3_op = comp.load_component_from_url('https://raw.githubusercontent.com/your-username/repo-name/master/module3.py')
+module1_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module1.py?token=GHSAT0AAAAAACBNBHNAY3JC6LSTKCES32Y6ZF6PS5Q')
+module2_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module2.py?token=GHSAT0AAAAAACBNBHNBDPXKNWXYM66EN7SEZF6PTVA')
+module3_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module3.py?token=GHSAT0AAAAAACBNBHNBAHDZG25QVTX4HLUGZF6PUEQ')
 
 @dsl.pipeline(
     name="Python Modules Orchestrated Pipeline",
