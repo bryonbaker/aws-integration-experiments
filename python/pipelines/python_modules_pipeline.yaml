@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: python-modules-orchestrated-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.21, pipelines.kubeflow.org/pipeline_compilation_time: '2023-07-25T02:12:06.790380',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "A pipeline that orchestrates
+      two Python modules.", "name": "Python Modules Orchestrated"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.21}
+spec:
+  entrypoint: python-modules-orchestrated
+  templates:
+  - name: module1
+    container:
+      command: [python, -c, print('Hello world.')]
+      image: python:3.8
+    metadata:
+      labels:
+        pipelines.kubeflow.org/kfp_sdk_version: 1.8.21
+        pipelines.kubeflow.org/pipeline-sdk-type: kfp
+        pipelines.kubeflow.org/enable_caching: "true"
+  - name: module2
+    container:
+      command: [python, -c, print('I am alive.')]
+      image: python:3.8
+    metadata:
+      labels:
+        pipelines.kubeflow.org/kfp_sdk_version: 1.8.21
+        pipelines.kubeflow.org/pipeline-sdk-type: kfp
+        pipelines.kubeflow.org/enable_caching: "true"
+  - name: python-modules-orchestrated
+    dag:
+      tasks:
+      - {name: module1, template: module1}
+      - name: module2
+        template: module2
+        dependencies: [module1]
+  arguments:
+    parameters: []
+  serviceAccountName: pipeline-runner

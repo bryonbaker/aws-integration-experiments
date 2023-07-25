@@ -1,28 +1,31 @@
-import kfp.dsl as dsl
-import kfp.components as comp
+import kfp
+from kfp import dsl
+from kfp.dsl import ContainerOp
+from kfp.gcp import use_gcp_secret
 
-# Define container ops for module1, module2, and module3
-module1_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module1.py?token=GHSAT0AAAAAACBNBHNAY3JC6LSTKCES32Y6ZF6PS5Q')
-module2_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module2.py?token=GHSAT0AAAAAACBNBHNBDPXKNWXYM66EN7SEZF6PTVA')
-module3_op = comp.load_component_from_url('https://raw.githubusercontent.com/bryonbaker/rhods-experiments/main/python/pipelines/module3.py?token=GHSAT0AAAAAACBNBHNBAHDZG25QVTX4HLUGZF6PUEQ')
+def run_module1():
+    return ContainerOp(
+        name="module1",
+        image="python:3.8",
+        command=["python", "-c", "print('Hello world.')"],
+    )
+
+def run_module2():
+    return ContainerOp(
+        name="module2",
+        image="python:3.8",
+        command=["python", "-c", "print('I am alive.')"],
+    )
 
 @dsl.pipeline(
-    name="Python Modules Orchestrated Pipeline",
-    description="A pipeline to orchestrate three Python modules (module1 and module2 in parallel, followed by module3)."
+    name="Python Modules Orchestrated",
+    description="A pipeline that orchestrates two Python modules.",
 )
 def python_modules_pipeline():
-    # Task to run module1
-    module1_task = module1_op()
-
-    # Task to run module2
-    module2_task = module2_op()
-
-    # Define parallel execution for module1 and module2
-    parallel_tasks = [module1_task, module2_task]
-
-    # Task to run module3 after both module1 and module2 complete
-    module3_task = module3_op()
-    module3_task.after(*parallel_tasks)
+    module1_task = run_module1()
+    module2_task = run_module2()
+    
+    module2_task.after(module1_task)
 
 if __name__ == "__main__":
     kfp.compiler.Compiler().compile(python_modules_pipeline, "python_modules_pipeline.yaml")
