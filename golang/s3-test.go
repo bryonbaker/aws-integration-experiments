@@ -54,31 +54,40 @@ func uploadToS3(bucketName, fileName string, data *os.File, sess *session.Sessio
 }
 
 func main() {
+	// Get the secret from somewhere out of version control
+	home := os.Getenv("HOME")
+	if home == "" {
+		fmt.Println("$HOME is not set.")
+	} else {
+		fmt.Printf("The value of $HOME is: %s\n", home)
+	}
 
+	// Read the Secrets file
 	viper.SetConfigName("secrets")
 	viper.SetConfigType("yaml")
 	// Set the path to look for the config file
-	viper.AddConfigPath(".")
+	viper.AddConfigPath(home)
 
-	// Read the configuration file
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("failed to read configuration file: %s", err))
 	}
 
-	secretKey := viper.GetString("secretKey")
+	secretAccessKey := viper.GetString("secretAccessKey")
 	accessKey := viper.GetString("accessKey")
 
+	// Read the configuration file from the current directory
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	// Set the path to look for the config file
 	viper.AddConfigPath(".")
 
-	// Read the configuration file
 	err = viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("failed to read configuration file: %s", err))
 	}
+
+	fmt.Printf("AWS access key: %s\nAWS Secret Access Key: %s\n", accessKey, secretAccessKey)
 
 	bucketName := viper.GetString("bucketName")
 	fileName := viper.GetString("fileName")
@@ -90,14 +99,17 @@ func main() {
 	if err != nil {
 		log.Fatal("Failed to read file:", err)
 	}
+	fmt.Printf("Bucket name: %s\nFilename: %s\n", bucketName, fileName)
 
-	sess := CreateNewAWSSession(accessKey, secretKey)
+	sess := CreateNewAWSSession(accessKey, secretAccessKey)
 
+	fmt.Printf("Creating bucket: %s\n", bucketName)
 	err = CreateBucket(sess, bucketName)
 	if err != nil {
 		log.Fatal("Failed to create bucket: ", err)
 	}
 
 	// Upload the data to S3 using AWS access keys
+	fmt.Printf("Uploading %s\n", fileName)
 	uploadToS3(bucketName, fileName, data, sess)
 }
