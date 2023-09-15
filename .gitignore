@@ -1,5 +1,4 @@
 aws-golang-tests.code-workspace
-config.yaml
 secrets.yaml
 src/env_variables.txt
 rhods-experiments.code-workspace
