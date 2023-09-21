@@ -2,3 +2,6 @@ aws-golang-tests.code-workspace
 secrets.yaml
 src/env_variables.txt
 rhods-experiments.code-workspace
+*-checkpoint*
+*.swp
+*.pyc

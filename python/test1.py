@@ -20,8 +20,7 @@ import_or_install("os")
 import os
 import boto3
 
-
-def get_secrets(file_name):
+def get_secrets():
     secret_env_name = 'AWS_SECRET_ACCESS_KEY'
     access_key_env_name = 'AWS_ACCESS_KEY_ID'
 
@@ -46,6 +45,8 @@ def get_secrets(file_name):
 
 def connect_to_aws_s3(access_key, secret_key):
     # Create an S3 client with the provided access keys
+    print("Connecting to AWS S3")
+    
     s3 = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
     return s3
@@ -80,13 +81,13 @@ def download_from_s3(bucket_name, path, object_name, s3, file_name):
 
 def main():
     # Read the S3 storage secrets from the environment.
-    access_key, secret_key = get_secrets("secrets.yaml")
+    access_key, secret_key = get_secrets()
 
     s3 = connect_to_aws_s3(access_key, secret_key)
 
     # Specify the S3 bucket name, desired file name, and AWS access keys
     bucket_name = 'brbaker-s3-demo-bucket'
-    file_name = "addresses.txt"
+    file_name = "addresses-new.txt"
     object_name = file_name
     path = "source-data"
 
@@ -96,7 +97,7 @@ def main():
     with open(file_name, 'r') as file:
         data = file.read()
 
-    uploaded_file_name = 'addresses-new3.txt'
+    uploaded_file_name = 'addresses-new.txt'
     # Upload the data to S3 using AWS access keys
     upload_to_s3(bucket_name, uploaded_file_name, data, s3)
 
