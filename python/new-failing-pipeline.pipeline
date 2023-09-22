@@ -1,0 +1,159 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "17910ff2-e00e-4e81-a3e2-fb9fe652fa7d",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "notebook1.ipynb",
+              "runtime_image": "quay.io/opendatahub/workbench-images:runtime-datascience-ubi9-python-3.9-6a6098d"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "notebook1.ipynb",
+              "image": "/notebook/pipeline-ux-test1/my-workbench/static/elyra/notebook.svg",
+              "x_pos": 231,
+              "y_pos": 360,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "e0b0e2a0-724b-4c22-a1ce-72aa391a0a3d",
+          "type": "execution_node",
+          "op": "execute-python-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [
+                "test_module.py"
+              ],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "main.py"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "main.py",
+              "image": "/notebook/pipeline-ux-test1/my-workbench/static/elyra/python.svg",
+              "x_pos": 550,
+              "y_pos": 378,
+              "description": "Run Python script"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "4a251779-eb87-4dca-9717-33955e1fb127",
+                  "node_id_ref": "17910ff2-e00e-4e81-a3e2-fb9fe652fa7d",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        },
+        "version": 8,
+        "runtime_type": "KUBEFLOW_PIPELINES",
+        "properties": {
+          "name": "new-failing-pipeline",
+          "runtime": "Data Science Pipelines",
+          "pipeline_defaults": {
+            "kubernetes_shared_mem_size": {},
+            "kubernetes_pod_labels": [],
+            "mounted_volumes": [],
+            "kubernetes_tolerations": [],
+            "kubernetes_pod_annotations": [],
+            "env_vars": [],
+            "kubernetes_secrets": [],
+            "runtime_image": "quay.io/opendatahub/workbench-images:runtime-datascience-ubi9-python-3.9-6a6098d"
+          }
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

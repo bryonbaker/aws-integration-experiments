@@ -71,7 +71,9 @@
           "op": "execute-python-node",
           "app_data": {
             "component_parameters": {
-              "dependencies": [],
+              "dependencies": [
+                "test_module.py"
+              ],
               "include_subdirectories": false,
               "outputs": [],
               "env_vars": [],
@@ -88,8 +90,8 @@
             "ui_data": {
               "label": "main.py",
               "image": "/notebook/pipeline-ux-test1/my-workbench/static/elyra/python.svg",
-              "x_pos": 596,
-              "y_pos": 488,
+              "x_pos": 641,
+              "y_pos": 482,
               "description": "Run Python script"
             }
           },
